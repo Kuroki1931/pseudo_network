@@ -9,8 +9,8 @@ from shapely.geometry import Point, Polygon
 # ramdom tap points
 start_point = [83.9159, 28.2905]
 end_point = [84.0289, 28.1873]
-x = np.linspace(start_point[0], end_point[0], 20)
-y = np.linspace(start_point[1], end_point[1], 20)
+x = np.linspace(start_point[0], end_point[0], 10)
+y = np.linspace(start_point[1], end_point[1], 10)
 point_list = []
 for i in x:
     for j in y:
@@ -21,7 +21,7 @@ point_df = gpd.GeoDataFrame(point_df, geometry=[loads(wkt) for wkt in point_df['
 point_df.to_file('random_point.gpkg', driver='GPKG')
 
 # ramdom source points
-source_index = np.random.randint(0, 400, 5)
+source_index = np.random.randint(0, 100, 5)
 tap_df = point_df[~point_df['id'].isin(source_index)]
 sor_df = point_df[point_df['id'].isin(source_index)]
 tap_df.to_file('goal_points.gpkg', driver='GPKG')

@@ -3,11 +3,12 @@ import networkx as nx
 import fiona
 import pandas as pd
 import numpy as np
+import tqdm
+import os
 
 from shapely.wkt import loads 
-from shapely.geometry import Point
+from shapely.geometry import Point, Polygon
 from scipy.spatial import cKDTree
-
 
 def _ckdnearest(gdA, gdB):
     nA = np.array(list(gdA.geometry.apply(lambda x: (x.x, x.y))))
@@ -25,25 +26,25 @@ def _ckdnearest(gdA, gdB):
     return gdf
 
 # get vertices - get start and end point of road
-def get_vertices(output=False):
+def get_vertices(output=True):
     point_unique_list = []
     road_unique_list = []
     geopoint_list = []
     road_length_list = []
     start_id = 0
-    with fiona.open('pokhara_road.gpkg') as lines:
+    with fiona.open('target_road.gpkg') as lines:
         for line in lines:
             # raod start point
             geopoint_list.append(str(Point(line['geometry']['coordinates'][0])))
             point_unique_list.append(start_id)
             start_id += 1
-            road_unique_list.append(line['properties']['index'])
+            road_unique_list.append(int(line['id'])-1)
             road_length_list.append(line['properties']['LENGTH'])
             # road end point
             geopoint_list.append(str(Point(line['geometry']['coordinates'][-1])))
             point_unique_list.append(start_id)
             start_id += 1
-            road_unique_list.append(line['properties']['index'])
+            road_unique_list.append(int(line['id'])-1)
             road_length_list.append(line['properties']['LENGTH'])
 
     df = pd.DataFrame({'net_id': point_unique_list, 'index': road_unique_list, 'geometry': geopoint_list, 'length': road_length_list})
@@ -61,13 +62,13 @@ def get_intersection(df):
     return intersection_list
 
 # select a representative point
-def select_rep_point(df, inter_list, output=False):
+def select_rep_point(df, inter_list, output=True):
     rep_point_list = []
     for i in inter_list:
         # take first point if it has some points
         rep_point_list.append(i[0])
     df = df.set_index('net_id').iloc[rep_point_list, :].reset_index()
-    df = df[['net_id', 'geometry']]
+    df = df[['net_id', 'index', 'geometry']]
     if output:
         df.to_file('rep_vertices.gpkg', driver='GPKG')
     return df
@@ -97,11 +98,14 @@ def get_ad_matrix(df):
 
 # get nearest points
 def get_neareset_points(df):
-    sor_df = gpd.read_file('pokhara_sor.gpkg').rename(columns={'id': 'source_id'})
-    tap_df = gpd.read_file('pokhara_tap.gpkg').rename(columns={'id': 'tap_id'})
-    sor_nearest_points = _ckdnearest(sor_df, df)[['source_id', 'net_id']]
-    tap_nearest_points = _ckdnearest(tap_df, df)[['tap_id', 'net_id']]
-    return sor_nearest_points, tap_nearest_points
+    start_df = gpd.read_file('start_points.gpkg').rename(columns={'id': 'start_id'})
+    goal_df = gpd.read_file('goal_points.gpkg').rename(columns={'id': 'goal_id'})
+    start_nearest_points = _ckdnearest(start_df, df)[['start_id', 'net_id']]
+    goal_nearest_points = _ckdnearest(goal_df, df)
+    # remove points too far from road
+    goal_nearest_points = goal_nearest_points[goal_nearest_points['dist']<0.003]
+    goal_nearest_points = goal_nearest_points[['goal_id', 'net_id']].reset_index(drop=True)
+    return start_nearest_points, goal_nearest_points
 
 
 vertices = get_vertices()
@@ -109,9 +113,60 @@ intersection_list = get_intersection(vertices)
 rep_vertices = select_rep_point(vertices, intersection_list)
 len_df = get_length(vertices, intersection_list)
 df_matrix = get_ad_matrix(len_df)
-sor_nearest_points, tap_nearest_points = get_neareset_points(rep_vertices)
+start_nearest_points, goal_nearest_points = get_neareset_points(rep_vertices)
 data = np.array(df_matrix)
 G=nx.from_numpy_matrix(data)
 
+# extract nearest start points
+goal_id_list = []
+nearest_len_list = []
+nearest_point_list = []
+start_id_list = []
+for i in tqdm.tqdm(range(goal_nearest_points.shape[0])):
+    goal_id_list.append(goal_nearest_points.loc[i, 'net_id'])
+    goal_id = goal_nearest_points.loc[i, 'net_id']
+    len_list = []
+    point_list = []
+    start_ids_list = []
+    for j in range(start_nearest_points.shape[0]):
+        start_ids_list.append(start_nearest_points.loc[j, 'net_id'])
+        start_id = start_nearest_points.loc[j, 'net_id']
+        nearest_point = nx.shortest_path(G, source=goal_id, target=start_id, weight='weight')
+        nearest_len = nx.shortest_path_length(G, source=goal_id, target=start_id, weight='weight')
+        len_list.append(nearest_len)
+        point_list.append(nearest_point)
+    min_len_index = len_list.index(min(len_list))
+    nearest_len_list.append(len_list[min_len_index])
+    nearest_point_list.append(point_list[min_len_index])
+    start_id_list.append(start_ids_list[min_len_index])
+output = pd.DataFrame({'goal_id': goal_id_list, 'start_id': start_id_list, 'length': nearest_len_list, 'point_list': nearest_point_list})
+output = output[output['length']!=10**5 - 1].reset_index(drop=True)
+output.to_csv('test.csv')
 
+
+# extract point and string geo data
+set_list = []
+for i in range(len_df.shape[0]):
+    b = {len_df.loc[i, 'start_id'], len_df.loc[i, 'end_id']}
+    set_list.append(b)
+for i in range(output.shape[0]):
+    # point
+    point_list = output.loc[i, 'point_list']
+    goal_id = output.loc[i, 'goal_id']
+    nearest_point_info = rep_vertices.set_index('net_id').loc[point_list, :].reset_index()[['net_id', 'index', 'geometry']]
+    nearest_point_info.to_file(f'./output/unite_point{goal_id}.gpkg', driver='GPKG')
+    
+    # string
+    index_list = []
+    for j in range(len(point_list)-1):
+        a = {point_list[j], point_list[j+1]}
+        for k in range(len(set_list)):
+            if set_list[k] == a:
+                index_list.append(k) 
+    road_index_list = len_df.loc[index_list, 'index'].values
+    road_info = road[road['index'].isin(road_index_list)][['index', 'LENGTH', 'geometry']]
+    try:
+        road_info.to_file(f'./output/road_info{goal_id}.gpkg', driver='GPKG')
+    except:
+        nearest_point_info.to_file(f'./output/road_info{goal_id}.gpkg', driver='GPKG')
 
