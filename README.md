@@ -24,11 +24,11 @@ By using the target district mesh, the road info is clipped.
 ![画像](/assets/tar_road_dis.png)
 
 ### random goal points
-You will get the goal points info.
+You will get the goal points info.  
 ![画像](/assets/goal_points.png)
 
 ### random start points
-Some goal points are changed to start points.
+Some goal points are changed to start points.  
 ![画像](/assets/start_points.png)
 
 
