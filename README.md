@@ -6,7 +6,7 @@ We prepared a simple task to learn how to use our code. If you want to know how 
 # task example
 ## dataset preparation
 In this task, we use nepal raod information as pseudo network.
-download npl_rdsl_trans_25K_50K_sdn_wgs84.zip from https://data.humdata.org/dataset/nepal-road-network to data dir.
+download npl_rdsl_trans_25K_50K_sdn_wgs84.zip from https://data.humdata.org/dataset/nepal-road-network unser ./data/road dir.
 
 ## excute data_collection.py or data_collection.ipynb
 In this file, you will get random tap points, random source points, target district raod.
@@ -18,6 +18,6 @@ We create tap water point information as goal points in this task.
 We change some ramdom tap points to source points. We will get the network info between tap points and source points.
 
 ### target district
-We create target district because road information is  to use directoly. 
+We create target district because road information is heavyto use directoly. 
 
 ## run excute.py or excute.ipynb
