@@ -13,15 +13,12 @@ download npl_rdsl_trans_25K_50K_sdn_wgs84.zip from https://data.humdata.org/data
 ## excute data_collection.py or data_collection.ipynb
 In this file, you will get random target district road, goal points, and random start points.
 
-
 ### target district
 We create target district because road information is heavyto use directoly. 
 
-
 ### random goal points
-We create goal points information.
+We create goal points information.  
 ![画像](/assets/goal_points.png)
-
 
 ### random start points
 We change some goal points to start points. We will get the network info between start points and goal points.
