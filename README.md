@@ -7,14 +7,16 @@ We prepared a simple task to learn how to use our code. If you want to know how 
 # task example
 ## dataset preparation
 In this task, we use nepal raod information as pseudo network.
-download npl_rdsl_trans_25K_50K_sdn_wgs84.zip from https://data.humdata.org/dataset/nepal-road-network unser ./data/road dir.
-
+download npl_rdsl_trans_25K_50K_sdn_wgs84.zip from https://data.humdata.org/dataset/nepal-road-network unser ./data/road dir.  
+![画像](/assets/road.png)
 
 ## excute data_collection.py or data_collection.ipynb
 In this file, you will get random target district road, goal points, and random start points.
 
-### target district
-We create target district because road information is heavyto use directoly. 
+### target district raod
+We create target district mesh because road information is heavyto use directoly. 
+By using the target district mesh, the road info is clipped.  
+![画像](/assets/tar_road_dis.png)
 
 ### random goal points
 We create goal points information.  
