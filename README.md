@@ -30,4 +30,4 @@ We change some goal points to start points. We will get the network info between
 
 ## run excute.py or excute.ipynb
 you will get the string and poing geo info.  
-![画像](/assets/pseudo network.png)
+![画像](/assets/pseudo_network.png)
