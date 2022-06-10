@@ -16,6 +16,7 @@ In this file, you will get random target district road, goal points, and random 
 ### target district raod
 We create target district mesh because road information is heavyto use directoly. 
 By using the target district mesh, the road info is clipped.  
+![画像](/assets/tar_road.png)
 ![画像](/assets/tar_road_dis.png)
 
 ### random goal points
