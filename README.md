@@ -1,17 +1,21 @@
 # pseudo_network
-This code is for creating pseudo network!
-We created both .py file and .ipynb file. You will utilize them depents on your tasks.
-We prepared a simple task to learn how to use our code. If you want to know how to use it, please follow below.
+This code is for creating pseudo network! You can get the geo info between start points and goal points.
+We created both .py file and .ipynb file. You will utilize them depending on your tasks.
+We prepared a simple task example to learn how to use our code. If you want to know how to use it, please follow below.
 
 
 # task example
 ## dataset preparation
-In this task, we use nepal raod information as pseudo network.
+In this task, you use nepal raod information as pseudo network.
 Download npl_rdsl_trans_25K_50K_sdn_wgs84.zip from https://data.humdata.org/dataset/nepal-road-network unser ./data/road dir.  
 ![画像](/assets/road.png)
 
 ## run data_collection.py or data_collection.ipynb
-In this file, you will get random target district road, goal points, and random start points.
+This task imput are  
+- start points geo data
+- goal points  geo data
+- network geo data
+In this file, you will get the target district road data, ramdom start points data, and random goal points data for the task.
 
 ### target district raod
 We create target district mesh because road information is heavy to use directoly. 
