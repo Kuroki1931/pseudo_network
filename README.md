@@ -11,10 +11,13 @@ download npl_rdsl_trans_25K_50K_sdn_wgs84.zip from https://data.humdata.org/data
 ## excute data_collection.py or data_collection.ipynb
 In this file, you will get random goal points, random start points, target district raod.
 
-### random tap points
+### random goal points
 We create goal points information.
+# ネットワーク
+![画像](/assets/S__10952715.jpg)
 
-### random source points
+
+### random start points
 We change some goal points to start points. We will get the network info between start points and goal points.
 
 ### target district
