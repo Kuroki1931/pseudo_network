@@ -1,12 +1,9 @@
 import geopandas as gpd
-import networkx as nx
-import fiona
 import pandas as pd
 import numpy as np
 
 from shapely.wkt import loads 
 from shapely.geometry import Point, Polygon
-from scipy.spatial import cKDTree
 
 
 # ramdom tap points
@@ -27,8 +24,8 @@ point_df.to_file('random_point.gpkg', driver='GPKG')
 source_index = np.random.randint(0, 400, 5)
 tap_df = point_df[~point_df['id'].isin(source_index)]
 sor_df = point_df[point_df['id'].isin(source_index)]
-tap_df.to_file('pokhara_tap.gpkg', driver='GPKG')
-sor_df.to_file('pokhara_sor.gpkg', driver='GPKG')
+tap_df.to_file('goal_points.gpkg', driver='GPKG')
+sor_df.to_file('start_points.gpkg', driver='GPKG')
 
 # traget district
 # district = gpd.read_file(r'./data/district/hermes_NPL_new_wgs_3.shp')
@@ -36,9 +33,9 @@ sor_df.to_file('pokhara_sor.gpkg', driver='GPKG')
 # tar_dis.to_file('pokhara_district.gpkg', driver='GPKG')
 polygon_geom = Polygon(zip([83.9158999999999935, 83.9158999999999935, 84.0288999999999930, 84.0288999999999930], [28.1873000000000005, 28.3057000000000016, 28.3057000000000016, 28.1873000000000005]))
 tar_dis = gpd.GeoDataFrame(index=[0], geometry=[polygon_geom])
-tar_dis.to_file('pokhara_district.gpkg', driver='GPKG')
+tar_dis.to_file('target_district.gpkg', driver='GPKG')
 
 # road info
 road = gpd.read_file(r'./data/road/npl_rdsl_trans_25K_50K_sdn_wgs84.shp')
 road_clipped = gpd.clip(road, tar_dis)
-road_clipped.to_file('pokhara_road.gpkg', driver='GPKG')
+road_clipped.to_file('target_road.gpkg', driver='GPKG')
