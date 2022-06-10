@@ -13,8 +13,7 @@ In this file, you will get random goal points, random start points, target distr
 
 ### random goal points
 We create goal points information.
-# ネットワーク
-![画像](/assets/S__10952715.jpg)
+![画像](/assets/goal_points.png)
 
 
 ### random start points
