@@ -34,7 +34,7 @@ Some goal points are changed to start points.
 
 ## run run.py or run.ipynb
 you will get the shortest string geo data between goal points and starts points.  
-This task removes goal points that are far from the.
+This task removes goal points that are too far from the road.
 ![画像](/assets/pseudo_network.png)
 
 # License
