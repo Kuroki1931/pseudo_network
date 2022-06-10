@@ -11,10 +11,13 @@ download npl_rdsl_trans_25K_50K_sdn_wgs84.zip from https://data.humdata.org/data
 ## excute data_collection.py or data_collection.ipynb
 In this file, you will get random tap points, random source points, target district raod.
 
-### random points
+### random tap points
+We create tap water point information as goal points in this task.
 
 ### random source points
+We change some ramdom tap points to source points. We will get the network info between tap points and source points.
 
 ### target district
+We create target district because road information is big to use directoly. 
 
 ## run excute.py or excute.ipynb
