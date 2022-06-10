@@ -18,6 +18,6 @@ We create tap water point information as goal points in this task.
 We change some ramdom tap points to source points. We will get the network info between tap points and source points.
 
 ### target district
-We create target district because road information is big to use directoly. 
+We create target district because road information is  to use directoly. 
 
 ## run excute.py or excute.ipynb
