@@ -11,10 +11,9 @@ Download npl_rdsl_trans_25K_50K_sdn_wgs84.zip from https://data.humdata.org/data
 ![画像](/assets/road.png)
 
 ## run data_collection.py or data_collection.ipynb
-This task input are  
-- start points geo data
-- goal points  geo data
-- network geo data  
+### setting
+Set the norht west latitude and longitude coordinates as start point, and the source east one as end point.  
+If you just want random goal points, set source_points as 0.  
 In this file, you will get the target district road data, random start points data, and random goal points data for the task.
 
 ### target district raod
