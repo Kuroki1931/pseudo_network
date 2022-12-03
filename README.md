@@ -17,7 +17,7 @@ Download npl_rdsl_trans_25K_50K_sdn_wgs84.zip from https://data.humdata.org/data
 3. In this file, you will get the target district road data, random start points data, and random goal points data for the task.
 
 ### target district raod
-Acoording to the statt_point and end_point you set, a target_district road will be clipped from the whole road information.
+Acoording to the stat_point and end_point you set, a target_district road will be clipped from the whole road information.
 By using the target district mesh, the road info is clipped.
 ![画像](/assets/tar_road.png)
 ![画像](/assets/tar_road_dis.png)
