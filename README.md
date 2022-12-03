@@ -10,7 +10,7 @@ In this task example, you will use Nepal raod information as the pseudo network.
 Download npl_rdsl_trans_25K_50K_sdn_wgs84.zip from https://data.humdata.org/dataset/nepal-road-network and put it under ./data/road.  
 ![画像](/assets/road.png)
 
-## run data_collection.py or data_collection.ipynb
+## execute data_collection.py
 ### setting
 1. Set the norht west latitude and longitude coordinates as start_point, and the source east one as end_point.  
 2. If you just want random goal points, set source_points as 0.  
@@ -31,7 +31,7 @@ Some goal points are changed to start points.
 ![画像](/assets/start_points.png)
 
 
-## run run.py or run.ipynb
+## execute run.py
 you will get the shortest string geo data between goal points and starts points.  
 This task removes goal points that are too far from the road.
 ![画像](/assets/pseudo_network.png)
