@@ -6,8 +6,8 @@ We prepared a simple task example to learn how to use our code. If you want to k
 
 # task example
 ## dataset preparation
-In this task, you use Nepal raod information as the pseudo network.
-Download npl_rdsl_trans_25K_50K_sdn_wgs84.zip from https://data.humdata.org/dataset/nepal-road-network unser ./data/road dir.  
+In this task example, you will use Nepal raod information as the pseudo network.  
+Download npl_rdsl_trans_25K_50K_sdn_wgs84.zip from https://data.humdata.org/dataset/nepal-road-network amd  ./data/road.  
 ![画像](/assets/road.png)
 
 ## run data_collection.py or data_collection.ipynb
