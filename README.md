@@ -1,7 +1,7 @@
 # pseudo_network
-This code is for creating a pseudo network! You can get the geo info between start points and goal points.
-We created both .py file and .ipynb file. You will utilize them depending on your tasks.
-We prepared a simple task example to learn how to use our code. If you want to know how to use it, please follow below.
+This code is for creating a pseudo network! You can get the geo info between start points and goal points.  
+We created both .py file and .ipynb file. You will utilize them depending on your tasks.  
+We prepared a simple task example to learn how to use our code. If you want to know how to use it, please follow below.  
 
 
 # task example
