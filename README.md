@@ -32,6 +32,7 @@ Some goal points are changed to start points.
 
 
 ## execute run.py
-you will get the shortest string geo data between goal points and starts points.  
-This task removes goal points that are too far from the road.
+1. If you want to use your own start points, you will change start_points.gpkg to yours.  
+2. you will get the shortest string geo data between goal points and starts points.  
+
 ![画像](/assets/pseudo_network.png)
