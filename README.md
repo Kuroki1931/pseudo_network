@@ -2,7 +2,7 @@
 
 So Kuroki*, Ogata Ryuji**, Maiko Sakamoto*
 
-*The University of Tokyo, **Japan International Cooperation Agency
+*The University of Tokyo, **Japan International Cooperation Agency  
 [[PDF]](https://onlinelibrary.wiley.com/doi/epdf/10.1111/wej.12844)
 
 # pseudo_network
