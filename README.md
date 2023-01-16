@@ -1,5 +1,9 @@
 # Predicting the Presence of E. coli in Tap Water Using Machine Learning in Nepal
 
+So Kuroki*, Ogata Ryuji**, Maiko Sakamoto*
+
+*The University of Tokyo, **Japan International Cooperation Agency, 
+
 # pseudo_network
 This code is for creating a pseudo network! You can get the geo info between start points and goal points.  
 We created both .py file and .ipynb file. You will utilize them depending on your tasks.  
