@@ -1,6 +1,6 @@
 # Predicting the Presence of E. coli in Tap Water Using Machine Learning in Nepal
 
-So Kuroki*, Ogata Ryuji**, Maiko Sakamoto*
+[So Kuroki](https://sites.google.com/view/sokuroki/home)*, Ogata Ryuji**, Maiko Sakamoto*
 
 *The University of Tokyo, **Japan International Cooperation Agency  
 
